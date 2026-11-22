@@ -1,0 +1,19 @@
+fastapi>=0.115
+uvicorn[standard]>=0.30
+python-multipart>=0.0.9
+sqlalchemy>=2.0
+reportlab>=4.0         # PDF report export (pure Python)
+opencv-python>=4.9
+pymavlink>=2.4.41       # BlueROV2 / ArduSub MAVLink telemetry (required for ROV data; the UI shows "pymavlink missing" without it)
+numpy>=1.26
+ultralytics>=8.3.40
+# PyTorch is installed separately so you get the CUDA build that matches your GPU.
+# RTX 50-series (Blackwell, sm_120) needs CUDA 12.8+:
+#   pip install torch torchvision --index-url https://download.pytorch.org/whl/cu128
+
+# Optional but recommended
+imageio-ffmpeg>=0.5     # bundled ffmpeg -> H.264 incident clips that play in the browser
+nvidia-ml-py>=12.0      # real GPU temperature / power / VRAM on the Hardware card
+psutil>=5.9
+google-genai>=1.0       # Gemini insight tier (set GEMINI_API_KEY)
+# psycopg[binary]>=3.1  # only for a PostgreSQL / AWS RDS database (database.url in config.toml)

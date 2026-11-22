@@ -1,0 +1,14 @@
+node_modules/
+dist/
+__pycache__/
+*.db
+*.db-wal
+*.db-shm
+backend/uploads/
+backend/models/*.pt
+runs/
+.env
+tests/e2e/.media/
+logs/
+
+README.md

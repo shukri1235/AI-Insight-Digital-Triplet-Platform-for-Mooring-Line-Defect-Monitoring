@@ -1,0 +1,693 @@
+{
+  "TIME-1": {
+    "video_s": 20.0,
+    "processing_s": 1.02,
+    "speed_x": 19.7,
+    "frames_per_s": 39.4,
+    "reader": "ffmpeg (hwaccel auto)",
+    "csv_rows": 2
+  },
+  "TIME-2": {
+    "read_ahead_off": {
+      "processing_s": 13.23,
+      "detect_s": 11.01,
+      "wait_s": 2.17,
+      "speed_x": 9.07
+    },
+    "read_ahead_on": {
+      "processing_s": 11.79,
+      "detect_s": 11.18,
+      "wait_s": 0.57,
+      "speed_x": 10.18
+    },
+    "gain_pct": 10.9
+  },
+  "CFG-1": {
+    "file": 0.7,
+    "env_beats_file": 4,
+    "broken_file_error": "TOMLDecodeError: Expected ']' at the end of a table declaration (at line 1, colu"
+  },
+  "CFG-5": {
+    "reported": [
+      "batch.batch_size",
+      "gemini.thinking",
+      "live.trigger_default",
+      "model.device",
+      "rov.mavlink_url",
+      "server.port"
+    ],
+    "warnings": 2,
+    "suggest": {
+      "live.trigger_hit": "live.trigger_hits"
+    }
+  },
+  "LOG-1": {
+    "samples": 73,
+    "sightings": {
+      "DEFORMATION": 1,
+      "CORROSION": 1
+    },
+    "clips": 1,
+    "settings": [
+      [
+        "MODE",
+        "ARMED"
+      ],
+      [
+        "RECORDING",
+        true
+      ],
+      [
+        "TRIGGER",
+        0.6
+      ],
+      [
+        "MODE",
+        "AUTO"
+      ],
+      [
+        "MODE",
+        "ARMED"
+      ],
+      [
+        "TRIGGER",
+        0.5
+      ],
+      [
+        "RECORDING",
+        false
+      ],
+      [
+        "RECORDING",
+        true
+      ]
+    ],
+    "tlogs": 2
+  },
+  "LOG-4": {
+    "legacy": {
+      "stored_s": 32416.2,
+      "shown_s": 16.1,
+      "idle_s": 32400.1
+    },
+    "new": {
+      "duration_s": 0.0,
+      "idle_s": 2.5
+    }
+  },
+  "LOGS-1": {
+    "file": "session_2026-11-22_03-04-10.txt",
+    "sample": "2026-11-22 03:04:14 | System   | [app] Session started - backend on port 8500, database local SQLite, settings at defaults"
+  },
+  "LOGS-2": {
+    "live_started": "2026-11-22 03:05:29 | Live     | [app] Live dive started: video:d169a0a7-17a6-4b83-97f4-d31a6c4cb90e on ML-01-NORTH, trigger 0.50, detection armed, dive log on - id cfbef6c1",
+    "live_ended": "2026-11-22 03:05:30 | Live     | [app] Live dive ended - id cfbef6c1, 0.0 min with data, 30 frames analysed"
+  },
+  "GA-2": {
+    "live_roundtrip_p95_ms": 73.2,
+    "live_wait_p95_ms": 46.0,
+    "batch_120_frames_s": 4.31,
+    "naive_worst_case_live_wait_ms": 2400,
+    "live_share_pct": 36.1,
+    "batch_share_pct": 63.9
+  },
+  "LBL-1": {
+    "splash_m": "0-50",
+    "mid_water_from_m": 50.1,
+    "old_db_migrated": true,
+    "edited_line_kept": true
+  },
+  "LBL-2": {
+    "labels": "High / Low confidence at 0.60",
+    "grade": "REPAIR",
+    "facts_field": "confidence_label"
+  },
+  "LBL-3": {
+    "html_basis": true,
+    "pdf_basis": true,
+    "pitting_name": "Pitting (grade 6\u20137)"
+  },
+  "LAT-1": {
+    "delay_saved_s_vs_16_threads": 0.494,
+    "two_vs_one_thread_s": 0.034,
+    "relative_delay_s": {
+      "16": 0.006,
+      "2": -0.488,
+      "1": -0.522
+    }
+  },
+  "PDF-1": {
+    "pages": 3,
+    "images": 2,
+    "bytes": 136328
+  },
+  "PDF-2": {
+    "template": "acme",
+    "logo": true,
+    "default_switch": true
+  },
+  "RS-1": {
+    "coverage": "Whole live dive (ended 2026-11-22 03:06, duration 0:12)",
+    "keyframes": [
+      [
+        "KF-1",
+        "EV-1"
+      ]
+    ]
+  },
+  "RS-3": {
+    "single": {
+      "input": 2954,
+      "output": 132,
+      "thinking": 100,
+      "total": 3186,
+      "images": 2
+    },
+    "with_regeneration_requests": 2
+  },
+  "TC-1.1": {
+    "live_after_s": 0.08,
+    "capture_fps_avg": 30.6
+  },
+  "TC-1.1-network": {
+    "frames_before_drop": 31,
+    "reconnected": true
+  },
+  "TC-1.2-offline": {
+    "state": "NO_ROV",
+    "telemetry": null
+  },
+  "TC-1.2": {
+    "depth_to_segment": [
+      [
+        5,
+        "Splash Zone"
+      ],
+      [
+        25,
+        "Splash Zone"
+      ],
+      [
+        60,
+        "Mid-Water Zone"
+      ],
+      [
+        120.5,
+        "Mid-Water Zone"
+      ],
+      [
+        150,
+        "Touchdown Zone"
+      ],
+      [
+        190,
+        "Touchdown Zone"
+      ]
+    ],
+    "msg_rate_hz": 33.9,
+    "sample": {
+      "depth": 190.0,
+      "heading": 134.0,
+      "temperature": 25.2,
+      "pressure_hpa": 20111.7,
+      "altitude": 10.0,
+      "mode": "ALT_HOLD"
+    }
+  },
+  "TC-1.2-linkloss": {
+    "stale_after_s": 2.7,
+    "offline_after_s": 4.7,
+    "events": [
+      "CONNECTED",
+      "PAUSED",
+      "LOST",
+      "CONNECTED"
+    ]
+  },
+  "TC-1.2-stale-clip": {
+    "clip": "ML-01-NORTH_Incident_NOROV_2026-11-22_030652.mp4",
+    "alert_telemetry": null,
+    "clip_sensor_rows": 0
+  },
+  "TC-1.3": {
+    "confidence": 0.88,
+    "severity": "High confidence",
+    "detection_latency_s": 0.064,
+    "depth": 120.5
+  },
+  "TC-1.4": {
+    "frames": 150,
+    "codec": "h264",
+    "duration": 5.0,
+    "name": "ML-01-NORTH_Incident_120_5m_2026-11-22_030625.mp4",
+    "trigger_offset_s": 2.898,
+    "write_time_ms_excl_postroll": 749.1
+  },
+  "TC-1.4-25fps": {
+    "buffer_capacity": 125,
+    "clip_duration": 5.0
+  },
+  "TC-1.6": {
+    "below_trigger_clipped": false,
+    "trigger_after_change_s": 0.11,
+    "threshold_log": [
+      [
+        0.0,
+        0.95
+      ],
+      [
+        8.59,
+        0.6
+      ]
+    ]
+  },
+  "TC-1.7": {
+    "standby_inference": 0,
+    "auto_surface_armed": false,
+    "auto_submerged_armed": true,
+    "auto_stale_armed": false
+  },
+  "TC-1.8": {
+    "samples": 15,
+    "rate_hz": 4.91,
+    "tlog_messages": 16,
+    "sensor_db": "fyp_sensors.db"
+  },
+  "NFR-1": {
+    "write_window_s": 2.73,
+    "frames_in_window": 82,
+    "late_frames_during_write": 0,
+    "late_frames_baseline": 0,
+    "max_gap_during_write_ms": 48.6,
+    "nominal_ms": 33.3,
+    "clip_write_ms": 749.1,
+    "session_max_gap_ms": 48.6
+  },
+  "NFR-1b": {
+    "capture_fps": 30.4,
+    "inference_fps": 9.6,
+    "frames_skipped": 86,
+    "p99_ms": 47.8
+  },
+  "NFR-4": {
+    "buffer_frames": 150,
+    "buffer_mb": 9.42,
+    "raw_bgr_equivalent_mb": 222.5
+  },
+  "TC-1.8-cut": {
+    "cut_s": 2.0,
+    "rows_in_cut": 0,
+    "rows": 14
+  },
+  "TC-1.9": {
+    "flickers_ignored": 2,
+    "held": {
+      "hits": 3,
+      "window": 5,
+      "need": 3
+    },
+    "first_hit_t": 5.053
+  },
+  "TC-2.1": {
+    "trigger_offset_s": 2.898,
+    "first_deformation_s": 2.898
+  },
+  "TC-2.2": {
+    "frame_index": 87,
+    "fps": 30.021,
+    "prev_frame_clean": true
+  },
+  "TC-2.3-indicator": {
+    "kind": "CLIP",
+    "recorded_conf": 0.4,
+    "trigger_conf": 0.6
+  },
+  "TC-2.3": {
+    "original": [
+      [
+        "DEFORMATION",
+        "deformation"
+      ]
+    ],
+    "reanalysed_0.25": [
+      [
+        "CORROSION",
+        "pitting"
+      ],
+      [
+        "DEFORMATION",
+        "deformation"
+      ]
+    ],
+    "runs": [
+      [
+        "CLIP",
+        0.4,
+        63
+      ],
+      [
+        "REANALYSIS",
+        0.25,
+        126
+      ]
+    ]
+  },
+  "TC-2.4": {
+    "events": [
+      [
+        "EV-1",
+        "DEFORMATION",
+        120.5,
+        "Mid-Water Zone"
+      ],
+      [
+        "EV-2",
+        "CORROSION",
+        120.5,
+        "Mid-Water Zone"
+      ]
+    ],
+    "images_sent": 4,
+    "grade": "REPAIR",
+    "status": "DRAFT"
+  },
+  "TC-2.4-segment": {
+    "touchdown_findings": 0,
+    "midwater_findings": 5
+  },
+  "TC-2.4-hallucination": {
+    "first_attempt_errors": [
+      "finding cites unknown event 'EV-99'",
+      "prose quotes 999 m - not a depth in the facts"
+    ],
+    "final": "grounded"
+  },
+  "TC-2.5": {
+    "second_call": 429,
+    "retry_after_s": 30,
+    "after_30s": 200
+  },
+  "TC-2.5-signoff": {
+    "edited": true,
+    "approved_by": "S. Ajed",
+    "locked": true,
+    "html_bytes": 61800
+  },
+  "TC-3.1": {
+    "duplicate_rejected": true,
+    "precheck_match": true,
+    "accept_time_s": 0.129
+  },
+  "TC-3.1-stream": {
+    "file_mb": 539.9,
+    "stream_upload_s": 1.673,
+    "mb_per_s": 322.7
+  },
+  "TC-3.1-inplace": {
+    "copied": false,
+    "threshold": 0.6,
+    "duplicate_status": 409,
+    "offline_flag": true,
+    "file_kept_after_delete": true
+  },
+  "TC-3.1b": {
+    "samples": 103,
+    "alignment": "manual offset",
+    "depth_at_0s": 144.89999389648438,
+    "deformation_depth": 152.9,
+    "segment": "Touchdown Zone"
+  },
+  "TC-3.2-state": {
+    "states": [
+      "QUEUED",
+      "PROCESSING",
+      "COMPLETED"
+    ],
+    "progress_samples": 32,
+    "eta_first_last": [
+      10.4,
+      0.6
+    ]
+  },
+  "TC-3.2-accuracy": {
+    "deformation": 6,
+    "pitting": 8,
+    "corrosion": 6
+  },
+  "TC-3.2-threshold": {
+    "at_0.60": [
+      "corrosion",
+      "deformation"
+    ],
+    "runs": [
+      [
+        "BATCH",
+        0.25,
+        20
+      ],
+      [
+        "REANALYSIS",
+        0.5,
+        12
+      ],
+      [
+        "REANALYSIS",
+        0.6,
+        12
+      ]
+    ]
+  },
+  "NFR-2": {
+    "live_capture_fps_min": 30.0,
+    "late_frames": 0,
+    "live_inference_fps_before": 30.7,
+    "live_inference_fps_during_median": 18.9,
+    "arbiter": {
+      "device": "cuda:0",
+      "liveActive": true,
+      "utilisationPct": 73.9,
+      "liveSharePct": 58.2,
+      "batchSharePct": 41.8,
+      "liveWaitMsP50": 47.0,
+      "liveWaitMsP95": 49.4,
+      "liveWaitMsMax": 53.3,
+      "liveInferMsP50": 23.9,
+      "queueDepth": 0,
+      "framesLive": 2828,
+      "framesBatch": 764
+    },
+    "batch_job": {
+      "runId": "e48c5c92-7d60-4a0b-bae7-73629b031ab9",
+      "videoId": "31515850-26f3-47ce-b024-073750213dbe",
+      "reader": "ffmpeg (hwaccel auto)",
+      "framesAnalysed": 120,
+      "elapsedSec": 5.17,
+      "videoSeconds": 60.0,
+      "speedX": 11.6,
+      "framesPerSec": 23.2,
+      "resumedFrom": 0.0
+    },
+    "samples": 170,
+    "nominalMs": 33.3,
+    "p50Ms": 31.5,
+    "p95Ms": 46.7,
+    "p99Ms": 48.1,
+    "maxMs": 48.5,
+    "lateFrames": 0
+  },
+  "NFR-5": {
+    "sensor_rows": 72000,
+    "defect_rows": 20000,
+    "ms": {
+      "history": 111,
+      "defects": 819,
+      "telemetry": 2363,
+      "videos": 161,
+      "telemetry_1hz": 553,
+      "report_facts": 1465
+    }
+  },
+  "TC-3.4": {
+    "killed_at_progress": 39.6,
+    "frames": 240,
+    "detections": 20,
+    "duplicates": 0,
+    "final_status": "COMPLETED",
+    "processing_s": 16.37,
+    "wall_s": 26.7,
+    "downtime_s": 8.0
+  },
+  "NFR-6": {
+    "cpu_cores": 16,
+    "ffmpeg": {
+      "runId": "680ee2bb-c986-41e7-8f7c-842ab0137544",
+      "videoId": "e37c2812-4fcb-4616-bdb6-9e307a170a72",
+      "reader": "ffmpeg (hwaccel auto)",
+      "framesAnalysed": 360,
+      "elapsedSec": 23.58,
+      "videoSeconds": 180.0,
+      "speedX": 7.6,
+      "framesPerSec": 15.3,
+      "resumedFrom": 0.0,
+      "est_4h_minutes": 31.6
+    },
+    "opencv": {
+      "runId": "e9e075ba-81aa-4b56-8c66-5dddab16630c",
+      "videoId": "e37c2812-4fcb-4616-bdb6-9e307a170a72",
+      "reader": "opencv",
+      "framesAnalysed": 360,
+      "elapsedSec": 7.99,
+      "videoSeconds": 180.0,
+      "speedX": 22.5,
+      "framesPerSec": 45.0,
+      "resumedFrom": 0.0,
+      "est_4h_minutes": 10.7
+    }
+  },
+  "SZ-2": {
+    "Splash Zone": {
+      "CORROSION": 0,
+      "DEFORMATION": 0
+    },
+    "Mid-Water Zone": {
+      "CORROSION": 1,
+      "DEFORMATION": 1
+    },
+    "Touchdown Zone": {
+      "CORROSION": 1,
+      "DEFORMATION": 0
+    }
+  },
+  "TM-2": {
+    "object_log": {
+      "mooringline": 4
+    },
+    "defect_raw_classes": [
+      "corrosion",
+      "deformation",
+      "pitting"
+    ]
+  },
+  "TM-4": {
+    "stream": "udp://127.0.0.1:15852",
+    "clip": "ML-01-NORTH_Incident_120_5m_2026-11-22_031023.mp4",
+    "telemetry_source": "SIM",
+    "session_objects": {
+      "mooringline": 4
+    }
+  },
+  "TM-5": {
+    "stand_in": {
+      "mooringline": "DEFORMATION"
+    },
+    "logged_as": "DEFORMATION (raw class mooringline)"
+  },
+  "TM-6": {
+    "tagged": true,
+    "stand_in_rows": 4
+  },
+  "TM-7": {
+    "test_report": "[TEST] Segment report - ML-01-NORTH / Mid-Water Zone",
+    "test_findings": 3
+  },
+  "TM-8": {
+    "stopped": true,
+    "rov_after": "NO_ROV"
+  },
+  "UI-2": {
+    "wrong_file": 409,
+    "missing_file": 400,
+    "same_file": 200,
+    "results_kept": true
+  },
+  "UI-3": {
+    "dive_events": {
+      "DEFORMATION": 1,
+      "CORROSION": 2
+    },
+    "clip_incident": {
+      "type": "DEFORMATION",
+      "confidence": 0.88,
+      "depth": 120.5,
+      "triggerConf": 0.6,
+      "sessionTime": 8.06
+    }
+  },
+  "UI-6": {
+    "fallback": "RULE_BASED",
+    "hint": "Google rejected the new-style \"AQ.\" key for this call. This is a known issue wit"
+  },
+  "UI-8": {
+    "suggested": "gemini-3.8-flash",
+    "generator": "gemini-3.8-flash"
+  },
+  "UI-9": {
+    "pin": true,
+    "idempotent": true,
+    "unpin": true,
+    "unknown": 404,
+    "clip_parent": "Live dive 2026-11-22 03:06"
+  },
+  "UI-10": {
+    "rule_stages_seen": [
+      "facts",
+      "keyframes",
+      "done"
+    ],
+    "ai_stages_seen": [
+      "facts",
+      "keyframes",
+      "done"
+    ],
+    "second_ai_job": 429,
+    "directory_fields": {
+      "scopeName": "ML-01 Scenario Dive",
+      "lineId": "ML-01-NORTH",
+      "findings": 3
+    }
+  },
+  "UI-11": {
+    "timings_ai": {
+      "facts": 0.03,
+      "keyframes": 0.1,
+      "ai": 0.01,
+      "check": 0.0,
+      "total": 0.14
+    },
+    "timeout_ms": 90000,
+    "sdk_attempts": 1,
+    "thinking": "LOW"
+  },
+  "UI-12": {
+    "fallback": {
+      "from": "gemini-3.8-flash",
+      "to": "gemini-3.5-flash-lite",
+      "reason": "busy",
+      "message": "503 UNAVAILABLE: This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later."
+    },
+    "attempts": [
+      {
+        "model": "gemini-3.8-flash",
+        "kind": "busy",
+        "seconds": 0.0,
+        "message": "503 UNAVAILABLE: This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later."
+      },
+      {
+        "model": "gemini-3.8-flash",
+        "kind": "busy",
+        "seconds": 0.0,
+        "message": "503 UNAVAILABLE: This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later."
+      }
+    ]
+  },
+  "UI-13": {
+    "report": "1e7a7b9b-e867-4a9f-b1a3-8049a2f4acf8",
+    "generator_after": "gemini-3.8-flash",
+    "notes_kept": true
+  },
+  "UI-14": {
+    "index": true,
+    "assets": true,
+    "api_not_shadowed": true
+  }
+}

@@ -1,0 +1,30 @@
+[E2E] scenario footage (import in place from here): D:\FYP Prog\tests\e2e\.media
+[E2E] isolated run dir: C:\Users\shukr\AppData\Local\Temp\mooring_e2e_csp36866
+[DB] Ready at C:\Users\shukr\AppData\Local\Temp\mooring_e2e_csp36866\e2e.db (WAL mode). Historical data preserved.
+[DB] Seeding representative offshore asset architecture...
+[YOLO] Loading weights: C:\Users\shukr\AppData\Local\Temp\mooring_e2e_csp36866\models\best.pt
+[ROV] Listening for BlueROV2 MAVLink on udpin:127.0.0.1:14551
+[YOLO] Ready: best.pt on cuda:0 (half=True) classes={0: 'deformation', 1: 'pitting', 2: 'corrosion', 3: 'mooringline'}
+[BATCH] Run 570ec3ab on c5e28a20: conf 0.25, 2.0 fps
+[ARBITER] model ready (v1, cuda:0)
+[BATCH] Completed run 570ec3ab: {'runId': '570ec3ab-2fa0-4081-9d07-768a453ac470', 'videoId': 'c5e28a20-371a-4a2b-92e1-ced960162c7b', 'reader': 'ffmpeg (hwaccel auto)', 'framesAnalysed': 40, 'elapsedSec': 0.95, 'videoSeconds': 20.0, 'speedX': 21.1, 'framesPerSec': 42.2, 'resumedFrom': 0.0}
+[BATCH] Run fed8ba6a on 38e106a0: conf 0.5, 2.0 fps
+[BATCH] Completed run fed8ba6a: {'runId': 'fed8ba6a-bdb6-40fd-9687-fc1e1b9e1381', 'videoId': '38e106a0-108a-4d27-bbae-16e9d9f7c776', 'reader': 'ffmpeg (hwaccel auto)', 'framesAnalysed': 8, 'elapsedSec': 0.58, 'videoSeconds': 4.0, 'speedX': 6.9, 'framesPerSec': 13.9, 'resumedFrom': 0.0}
+[BATCH] Run 83fddf18 on e5332f94: conf 0.6, 2.0 fps
+[BATCH] Completed run 83fddf18: {'runId': '83fddf18-6700-4c23-a0ed-418a8acf7959', 'videoId': 'e5332f94-7e32-49cc-9f85-0f5c7b443623', 'reader': 'ffmpeg (hwaccel auto)', 'framesAnalysed': 10, 'elapsedSec': 0.55, 'videoSeconds': 5.0, 'speedX': 9.0, 'framesPerSec': 18.0, 'resumedFrom': 0.0}
+[LIVE] Connected to Replay as live - ML-01 Dive (last month) (replay, 30.0 fps, buffer 150 frames)
+[INCIDENT] Saved 150-frame clip (5.00s, trigger 2.903s) -> C:\Users\shukr\AppData\Local\Temp\mooring_e2e_csp36866\managed_media\incidents\incident-5861898b.mp4
+[BATCH] Run 0738a8be on 5861898b: conf 0.25, 29.972 fps
+[BATCH] Completed run 0738a8be: {'runId': '0738a8be-fb47-46db-b839-38d62905c446', 'videoId': '5861898b-40e7-42a8-bee7-7605ffda01e0', 'reader': 'opencv', 'framesAnalysed': 150, 'elapsedSec': 2.93, 'videoSeconds': 5.0, 'speedX': 1.7, 'framesPerSec': 51.1, 'resumedFrom': 0.0}
+[REPORT] INCIDENT 5861898b: facts 0.0s, keyframes 0.2s, ai 0.0s, check 0.0s, total 0.3s
+[REPORT] gemini-3.8-flash: busy after 0.0 s - 503 UNAVAILABLE: This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try ag
+[INCIDENT] Saved 150-frame clip (4.99s, trigger 2.897s) -> C:\Users\shukr\AppData\Local\Temp\mooring_e2e_csp36866\managed_media\incidents\incident-3e221b21.mp4
+[REPORT] gemini-3.8-flash: busy after 0.0 s - 503 UNAVAILABLE: This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try ag
+[REPORT] gemini-3.5-flash-lite: busy after 0.0 s - 503 UNAVAILABLE: This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try ag
+[REPORT] Gemini failed, rule-based draft instead: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}
+[REPORT] INCIDENT 5861898b: facts 0.0s, keyframes 0.2s, ai 2.0s, rules 0.0s, total 2.3s
+[REPORT] INCIDENT 5861898b: facts 0.0s, keyframes 0.2s, ai 0.0s, check 0.0s, total 0.3s
+[INCIDENT] Saved 150-frame clip (5.00s, trigger 2.9s) -> C:\Users\shukr\AppData\Local\Temp\mooring_e2e_csp36866\managed_media\incidents\incident-93512e62.mp4
+[TEST MODE] streaming ML01_dive_last_month.mp4 -> udp://127.0.0.1:5600; ROV sim -> udpout:127.0.0.1:14551; stand-in none
+[LIVE] Connected to TEST ROV camera - ML01_dive_last_month.mp4 (simulated BlueOS UDP stream) (network, 30.0 fps, buffer 150 frames, 2 decoder threads)
+[INCIDENT] Saved 150-frame clip (5.00s, trigger 2.898s) -> C:\Users\shukr\AppData\Local\Temp\mooring_e2e_csp36866\managed_media\incidents\incident-b1c2c93e.mp4

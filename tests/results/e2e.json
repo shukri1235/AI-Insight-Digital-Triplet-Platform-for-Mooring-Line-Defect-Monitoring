@@ -1,0 +1,458 @@
+[
+  {
+    "id": "E2E-0.1",
+    "title": "Live tab boots in standby (no stream auto-selected)",
+    "pass": true,
+    "detail": ""
+  },
+  {
+    "id": "E2E-0.2",
+    "title": "No ROV: telemetry card shows the offline placeholder, no numbers",
+    "pass": true,
+    "detail": ""
+  },
+  {
+    "id": "E2E-0.3",
+    "title": "No ROV: digital twin shows \"ROV offline\" and no ROV node",
+    "pass": true,
+    "detail": ""
+  },
+  {
+    "id": "E2E-CB.1",
+    "title": "Live detection card: trigger slider defaults to 0.60, detection defaults to Auto",
+    "pass": true,
+    "detail": ""
+  },
+  {
+    "id": "E2E-UI.1",
+    "title": "Gear opens the System drawer: model, Test Mode, GPU sharing, event log",
+    "pass": true,
+    "detail": ""
+  },
+  {
+    "id": "E2E-UI.5",
+    "title": "System drawer: Gemini card tests the key with one tiny request and says the result",
+    "pass": true,
+    "detail": "Gemini answered \"OK\" in 0 ms — the key works."
+  },
+  {
+    "id": "E2E-UI.8",
+    "title": "Gemini defaults to Flash (standard)",
+    "pass": true,
+    "detail": ""
+  },
+  {
+    "id": "E2E-UI.9",
+    "title": "Flash-Lite (bulk) can be chosen and the backend saves it; switching back restores Flash",
+    "pass": true,
+    "detail": ""
+  },
+  {
+    "id": "E2E-UI.20",
+    "title": "System drawer: settings file card says no config.toml is read (defaults) and offers to create one",
+    "pass": true,
+    "detail": ""
+  },
+  {
+    "id": "E2E-UI.24",
+    "title": "Event log paper trail: the browser's entries are saved to this session's text file, shown in the System drawer",
+    "pass": true,
+    "detail": "session_2026-11-22_00-58-57.txt"
+  },
+  {
+    "id": "E2E-UI.23",
+    "title": "Settings: every setting in use is listed with its value and source; search finds it; each explains what it does, when to change it and the allowed range",
+    "pass": true,
+    "detail": "26 rows"
+  },
+  {
+    "id": "E2E-UI.21",
+    "title": "Template editor: edit company / footer, save, copy as a new client template, make it the default, PDF preview",
+    "pass": true,
+    "detail": "http://localhost:8500/api/report-templates/acme/preview?v=1 -> application/pdf"
+  },
+  {
+    "id": "E2E-0.4",
+    "title": "Review tab boots on the media library (no file auto-selected)",
+    "pass": true,
+    "detail": ""
+  },
+  {
+    "id": "E2E-CB.2",
+    "title": "Review has no threshold slider and no live controls",
+    "pass": true,
+    "detail": ""
+  },
+  {
+    "id": "E2E-CB.3",
+    "title": "Batch tab: no sliders or live controls; explains the per-dive threshold",
+    "pass": true,
+    "detail": ""
+  },
+  {
+    "id": "E2E-3.1a",
+    "title": "Import is blocked until a detection threshold is chosen",
+    "pass": true,
+    "detail": ""
+  },
+  {
+    "id": "E2E-3.1b",
+    "title": "Registered in place (no copy), queued at the chosen threshold",
+    "pass": true,
+    "detail": "Registered \"ML-01 Dive (last month)\" in place (nothing copied). Fingerprinting, then processing at 0.25."
+  },
+  {
+    "id": "E2E-3.2",
+    "title": "Vault shows the state machine progressing to COMPLETED",
+    "pass": true,
+    "detail": "HASHING → COMPLETED"
+  },
+  {
+    "id": "E2E-3.1c",
+    "title": "Importing the same file again is rejected as a duplicate (SHA-256)",
+    "pass": true,
+    "detail": "Already ingested as 'ML-01 Dive (last month)'"
+  },
+  {
+    "id": "E2E-3.2b",
+    "title": "Dive row shows its defect events per type",
+    "pass": true,
+    "detail": ""
+  },
+  {
+    "id": "E2E-3.2c",
+    "title": "Batch table shows how long the analysis took (speed × real time, breakdown on hover); all runs as CSV",
+    "pass": true,
+    "detail": "0.9 s · 21.1× real time"
+  },
+  {
+    "id": "E2E-UI.4",
+    "title": "Registry zone click filters the dive table (dive without depth log is not in any zone)",
+    "pass": true,
+    "detail": "rows in Mid-Water: 0"
+  },
+  {
+    "id": "E2E-UI.17",
+    "title": "Batch: tick several files, shared line + threshold with a per-file override, one click imports all",
+    "pass": true,
+    "detail": "2 staged · ML-02-WEST 0.5 / 0.6"
+  },
+  {
+    "id": "E2E-UI.18",
+    "title": "Batch table: column headers sort (click again reverses); each row shows when it was added",
+    "pass": true,
+    "detail": "ML-01 Dive (last month) | ML02_dive_a | ML02_dive_b"
+  },
+  {
+    "id": "E2E-3.3",
+    "title": "Review opens the dive with its recorded threshold shown (indicator, not a slider)",
+    "pass": true,
+    "detail": "Batch · ≥ 0.25"
+  },
+  {
+    "id": "E2E-3.3b",
+    "title": "Dive without a sensor log says so instead of showing values",
+    "pass": true,
+    "detail": ""
+  },
+  {
+    "id": "E2E-1.0",
+    "title": "BlueROV2 heartbeat → ROV link CONNECTED, offline placeholder replaced by telemetry",
+    "pass": true,
+    "detail": ""
+  },
+  {
+    "id": "E2E-1.2",
+    "title": "Digital twin + telemetry follow the vehicle to 120.5 m (Mid-Water)",
+    "pass": true,
+    "detail": ""
+  },
+  {
+    "id": "E2E-1.1",
+    "title": "Live feed is a broadcast: no <video>, no playback controls",
+    "pass": true,
+    "detail": ""
+  },
+  {
+    "id": "E2E-1.3",
+    "title": "Alert: Deformation 88 % at 120.5 m (Mid-Water); the log records the ≥ 0.60 trigger",
+    "pass": true,
+    "detail": "Deformation clipped Deformation 88% at 120.5 m, Mid-Water · T+0:08 Review incident Report"
+  },
+  {
+    "id": "E2E-1.5a",
+    "title": "Alert reads \"Deformation clipped\" (no severity claimed) with Review / Report buttons",
+    "pass": true,
+    "detail": ""
+  },
+  {
+    "id": "E2E-UI.2",
+    "title": "Report from the alert opens the report assistant scoped to that incident (live keeps running)",
+    "pass": true,
+    "detail": ""
+  },
+  {
+    "id": "E2E-1.5b",
+    "title": "Hand-off lands in Review with the incident clip loaded",
+    "pass": true,
+    "detail": "ML-01-NORTH_Incident_120_5m_2026-11-22_005939.mp4"
+  },
+  {
+    "id": "E2E-2.0",
+    "title": "Review shows how the clip was recorded: logged ≥ 0.40, triggered ≥ 0.60",
+    "pass": true,
+    "detail": "Recorded live · ≥ 0.40 · trigger 0.60"
+  },
+  {
+    "id": "E2E-2.1",
+    "title": "Scrubber shows the trigger marker",
+    "pass": true,
+    "detail": ""
+  },
+  {
+    "id": "E2E-UI.6",
+    "title": "Previous defect is disabled at the start of the clip; next defect is enabled",
+    "pass": true,
+    "detail": ""
+  },
+  {
+    "id": "E2E-UI.7",
+    "title": "Full screen shows the player with its bounding-box layer and controls",
+    "pass": true,
+    "detail": ""
+  },
+  {
+    "id": "E2E-2.2",
+    "title": "Marker snaps to the trigger frame and shows the logged deformation box only",
+    "pass": true,
+    "detail": "[\"DEFORMATION\"]"
+  },
+  {
+    "id": "E2E-2.2b",
+    "title": "Review telemetry comes from the recorded sensor log (120.5 m)",
+    "pass": true,
+    "detail": ""
+  },
+  {
+    "id": "E2E-2.2c",
+    "title": "Clip lanes: deformation is drawn from the trigger to the end (post-roll)",
+    "pass": true,
+    "detail": ""
+  },
+  {
+    "id": "E2E-UI.13",
+    "title": "Clicking a defect bar in a lane jumps to the start of that sighting",
+    "pass": true,
+    "detail": "bar 2.903 → 2.903"
+  },
+  {
+    "id": "E2E-2.3a",
+    "title": "Re-analyse at 0.25 → new analysis, original kept (2 analyses listed)",
+    "pass": true,
+    "detail": ""
+  },
+  {
+    "id": "E2E-2.3b",
+    "title": "Secondary pitting now appears on the same trigger frame",
+    "pass": true,
+    "detail": "[\"Pitting 32%\",\"Deformation 88%\"]"
+  },
+  {
+    "id": "E2E-2.3c",
+    "title": "Review never changes the live trigger threshold",
+    "pass": true,
+    "detail": "live trigger 0.6"
+  },
+  {
+    "id": "E2E-2.4a",
+    "title": "Report scope defaults to this incident",
+    "pass": true,
+    "detail": ""
+  },
+  {
+    "id": "E2E-UI.15",
+    "title": "Generating a report shows staged progress (facts → key frames → draft → check) until the draft opens",
+    "pass": true,
+    "detail": "last stage: done"
+  },
+  {
+    "id": "E2E-2.4b",
+    "title": "Draft report is grounded (claims checked against the DB) with key frames",
+    "pass": true,
+    "detail": ""
+  },
+  {
+    "id": "E2E-2.4c",
+    "title": "Findings carry depth + segment from the ROV log, not the UI selection",
+    "pass": true,
+    "detail": ""
+  },
+  {
+    "id": "E2E-2.4d",
+    "title": "Clicking a cited event jumps the review player to it",
+    "pass": true,
+    "detail": "0:02.899"
+  },
+  {
+    "id": "E2E-2.5c",
+    "title": "Engineer approval locks the report",
+    "pass": true,
+    "detail": ""
+  },
+  {
+    "id": "E2E-UI.22",
+    "title": "Report view: \"Download PDF\" gives a real PDF file (default template) named after the scope",
+    "pass": true,
+    "detail": "186905 bytes, attachment; filename=\"ML-01-NORTH_Incident_120_5m_2026-11-22_005939_approved.pdf\""
+  },
+  {
+    "id": "E2E-2.5a",
+    "title": "Token-saver: AI generation locked for 30 s",
+    "pass": true,
+    "detail": "AI cooldown (27s)"
+  },
+  {
+    "id": "E2E-2.5b",
+    "title": "Cooldown survives a page refresh (server-enforced)",
+    "pass": true,
+    "detail": "AI cooldown (24s)"
+  },
+  {
+    "id": "E2E-UI.16",
+    "title": "Reports tab lists every report (newest first, sortable, dated) and opens one",
+    "pass": true,
+    "detail": "1 rows"
+  },
+  {
+    "id": "E2E-UI.19",
+    "title": "Gemini busy: the rule-based draft offers \"Redraft with Gemini\", which replaces it in place when Gemini is back",
+    "pass": true,
+    "detail": "RULE_BASED → gemini-3.8-flash"
+  },
+  {
+    "id": "E2E-1.6",
+    "title": "A new incident while on another tab still raises an alert (live keeps running)",
+    "pass": true,
+    "detail": ""
+  },
+  {
+    "id": "E2E-UI.10",
+    "title": "Library lists every dive and clip, newest first, grouped by day",
+    "pass": true,
+    "detail": "5 rows"
+  },
+  {
+    "id": "E2E-UI.11",
+    "title": "Library filters (incident clips only) and search narrow the list",
+    "pass": true,
+    "detail": "2 clips, search → 1"
+  },
+  {
+    "id": "E2E-UI.12",
+    "title": "Pinning moves a dive to the top, survives a page reload (saved on the server) and can be undone",
+    "pass": true,
+    "detail": ""
+  },
+  {
+    "id": "E2E-UI.3",
+    "title": "Several incidents in one dive stack in one alert (count + earlier incidents with Review/Report)",
+    "pass": true,
+    "detail": "2 this dive"
+  },
+  {
+    "id": "E2E-UI.14",
+    "title": "Live sightings strip: a clipped sighting is framed and opens its clip in Review at that moment",
+    "pass": true,
+    "detail": "2 framed · opened=true · t=2.4"
+  },
+  {
+    "id": "E2E-1.7",
+    "title": "Standby: video keeps streaming, detection stops (badge shown)",
+    "pass": true,
+    "detail": ""
+  },
+  {
+    "id": "E2E-1.8",
+    "title": "Freeze Frame freezes the view only — capture keeps running",
+    "pass": true,
+    "detail": ""
+  },
+  {
+    "id": "E2E-LOG.1",
+    "title": "Live tab \"Dive log\" opens the running dive: LIVE, depth over time, clip markers, sightings, hover readout",
+    "pass": true,
+    "detail": "2 clips · 4 sightings · T+0:23 00.59.52 / Depth 120.5 m · heading 133° / Water 26.6 °C · battery 16.2 V / ALT_HOLD · armed"
+  },
+  {
+    "id": "E2E-LOG.2",
+    "title": "Dive log: downloads (sensor CSV of every reading, .tlog), settings changes and a summary",
+    "pass": true,
+    "detail": "csv=true · Sensor log (CSV, all 181 readings) / Sightings (CSV) / Vehicle + operator events (CSV) / dive-20261122-005929-fe1f408a.tlog · 0 MB · settings: DIVE TIME\tCLOCK\tSETTING\tVALUE\t / T+0:00\t00.59.29\tDetection mode\tauto\tat start / T+0:00\t00.59.29\tDive-log recording\ton\tat start / T+0:00\t00.59.29\tClip trigger\t≥ 0.60\tat start / T+0:39\t01.00.08\tDetection mode\tstandby\tchanged / T+0:39\t01.00.08\tDetection mode\tarmed\tchanged"
+  },
+  {
+    "id": "E2E-LOG.3",
+    "title": "Clicking a clip on the dive log opens that clip in Review at the trigger; closing it returns to the dive log",
+    "pass": true,
+    "detail": "t=2.903 · back=\"Dive log\""
+  },
+  {
+    "id": "E2E-LOG.4",
+    "title": "The Review library lists live dive logs (\"Live dive · log only\") with their own filter",
+    "pass": true,
+    "detail": ""
+  },
+  {
+    "id": "E2E-1.9",
+    "title": "Vehicle silent → values marked STALE, then the offline placeholder returns",
+    "pass": true,
+    "detail": ""
+  },
+  {
+    "id": "E2E-T.1",
+    "title": "Stand-in editor offers the model's generic classes only (no defect classes)",
+    "pass": true,
+    "detail": "class…,mooringline"
+  },
+  {
+    "id": "E2E-T.2",
+    "title": "Test Mode on: banner across the app, ROV pill reads \"ROV SIM\", telemetry flagged simulated",
+    "pass": true,
+    "detail": ""
+  },
+  {
+    "id": "E2E-T.3",
+    "title": "The simulated ROV camera (UDP stream) is pre-selected as the source",
+    "pass": true,
+    "detail": "udp://127.0.0.1:5600?overrun_nonfatal=1&fifo_size=5000000"
+  },
+  {
+    "id": "E2E-T.4",
+    "title": "Generic (non-defect) detections are drawn on the live feed",
+    "pass": true,
+    "detail": ""
+  },
+  {
+    "id": "E2E-T.5",
+    "title": "The test dive is tagged TEST and still clips a real defect class",
+    "pass": true,
+    "detail": ""
+  },
+  {
+    "id": "E2E-T.6",
+    "title": "The test clip opens in Review with a TEST badge and simulated sensor log",
+    "pass": true,
+    "detail": ""
+  },
+  {
+    "id": "E2E-T.7",
+    "title": "Stopping Test Mode removes the banner and ends the test dive",
+    "pass": true,
+    "detail": ""
+  },
+  {
+    "id": "E2E-JS",
+    "title": "No uncaught JavaScript errors",
+    "pass": true,
+    "detail": ""
+  }
+]

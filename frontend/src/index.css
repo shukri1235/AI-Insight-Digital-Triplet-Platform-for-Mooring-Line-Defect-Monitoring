@@ -1,0 +1,136 @@
+@import "tailwindcss";
+
+/* ---------------------------------------------------------------------------
+ * Mooring Twin design tokens (see the UI redesign mock-up).
+ * Custom names (bg-card, text-acc ...) are used by the redesigned screens; the
+ * slate / indigo / rose scales are re-tuned so older markup (report modal, file
+ * browser) follows the same palette.
+ * ------------------------------------------------------------------------- */
+@theme {
+  --font-sans: "Manrope", "Segoe UI", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", "Cascadia Mono", Consolas, ui-monospace, monospace;
+  --font-log: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  --font-label: "Saira", "Bahnschrift", "Segoe UI", system-ui, sans-serif;
+
+  /* Readability (3.6.10): small text one step larger for long shifts; Tailwind's xs is 12 px by default */
+  --text-xs: 0.8125rem;                 /* 13 px */
+  --text-xs--line-height: 1.45;
+
+  --color-ink: #0A1016;
+  --color-bar: #0D151D;
+  --color-card: #111A23;
+  --color-line: #1C2733;
+  --color-edge: #243242;
+  --color-edge2: #2A3A4B;
+  --color-btn: #182330;
+  --color-sel: #1A2733;
+  --color-tx: #E8EEF3;
+  --color-tx2: #C4CFDA;
+  --color-mut: #AEBCC9;   /* 9.1:1 on card (was #93A3B3, 6.8:1) */
+  --color-dim: #A3B1BF;   /* 8.0:1 on card (was #7F8D9B, 5.2:1) */
+
+  --color-acc: #3DD6C3;
+  --color-acc-tx: #7EE3D6;
+  --color-acc-bg: #0F2A28;
+  --color-on-acc: #04201C;
+
+  --color-def: #FF6B5E;
+  --color-def-tx: #FF8A80;
+  --color-def-soft: #FFB4AC;
+  --color-def-bg: #2B0F0E;
+  --color-def-edge: #A3352D;
+  --color-on-def: #1A0503;
+
+  --color-pit: #C4A3FF;
+  --color-pit-tx: #DCCBFF;
+  --color-pit-bg: #2A2140;
+  --color-on-pit: #1B1030;
+
+  --color-tst: #F2B33D;
+  --color-on-tst: #1A1203;
+  --color-ok: #6FD6A0;
+  --color-warn: #F7C55B;
+
+  /* legacy scales, re-tuned */
+  --color-slate-100: #E8EEF3;
+  --color-slate-200: #D5DEE6;
+  --color-slate-300: #C4CFDA;
+  --color-slate-400: #AEBCC9;
+  --color-slate-500: #A3B1BF;
+  --color-slate-600: #4A5B6C;
+  --color-slate-700: #2A3A4B;
+  --color-slate-800: #1C2733;
+  --color-slate-900: #111A23;
+  --color-slate-950: #0A1016;
+  --color-indigo-200: #B5F1E9;
+  --color-indigo-300: #7EE3D6;
+  --color-indigo-400: #3DD6C3;
+  --color-indigo-500: #25B3A3;
+  --color-indigo-600: #137A6F;
+  --color-indigo-700: #0F5F57;
+  --color-indigo-800: #154440;
+  --color-indigo-900: #0F2A28;
+  --color-indigo-950: #0B201F;
+
+  --animate-rise: rise .34s ease-out both;
+  --animate-alert: slide-in .35s ease-out both, alarm-glow 1.2s ease-in-out .35s 3;
+  --animate-live: live-pulse 1.6s ease-in-out infinite;
+  --animate-drawer: drawer-in .25s cubic-bezier(.2, .8, .2, 1) both;
+}
+
+@keyframes rise { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+@keyframes slide-in { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: none; } }
+@keyframes alarm-glow { 0%, 100% { box-shadow: 0 0 0 0 rgba(255, 107, 94, 0); } 50% { box-shadow: 0 0 0 6px rgba(255, 107, 94, .22); } }
+@keyframes live-pulse { 0%, 100% { opacity: 1; } 50% { opacity: .35; } }
+@keyframes drawer-in { from { transform: translateX(32px); } to { transform: none; } }
+@keyframes rov-ring { 0% { r: 5; opacity: .7; } 100% { r: 16; opacity: 0; } }
+
+:root { color-scheme: dark; }
+body { margin: 0; background: var(--color-ink); font-variant-numeric: tabular-nums; }
+
+/* every tab's cards rise in with a short stagger */
+.stagger > * { animation: var(--animate-rise); }
+.stagger > *:nth-child(2) { animation-delay: .05s; }
+.stagger > *:nth-child(3) { animation-delay: .1s; }
+.stagger > *:nth-child(4) { animation-delay: .15s; }
+.stagger > *:nth-child(5) { animation-delay: .2s; }
+.rov-ring { animation: rov-ring 2s ease-out infinite; }
+
+button, a, select, input { transition: background-color .18s ease, color .18s ease, border-color .18s ease, box-shadow .18s ease, transform .12s ease, filter .18s ease; }
+button:not(:disabled):hover, a:hover { filter: brightness(1.15); }
+button:not(:disabled):active, a:active { transform: scale(.97); }
+:focus-visible { outline: 2px solid var(--color-acc); outline-offset: 2px; }
+
+/* bounding-box labels: wide technical caps; numbers in mono */
+.box-label { font-family: var(--font-label); font-stretch: 125%; font-weight: 700; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; white-space: nowrap; padding: 3px 9px; border-radius: 6px; line-height: 1.25; }
+.box-label b { font-family: var(--font-mono); font-weight: 600; font-size: 12px; letter-spacing: 0; }
+
+/* event log: time | type tag | message (IBM Plex Sans for skimming) */
+.log { font-family: var(--font-log); font-size: 13px; line-height: 1.4; color: #DCE4EA; }
+.log > div { display: grid; grid-template-columns: 62px 70px minmax(0, 1fr); column-gap: 10px; align-items: baseline; padding: 4px 8px; border-radius: 6px; }
+.log > div:hover { background: #16212C; }
+.log .t { font-family: var(--font-mono); font-size: 12px; color: #6F7E8C; }
+.log .k { font-family: var(--font-label); font-stretch: 125%; font-weight: 700; font-size: 9.5px; letter-spacing: .1em; text-transform: uppercase; color: #8A99A8; }
+.log b { font-weight: 600; color: #fff; }
+.log .crit { background: rgba(255, 107, 94, .08); box-shadow: inset 3px 0 0 var(--color-def); }
+.log .crit .k { color: var(--color-def-tx); }
+.log .ok .k { color: var(--color-ok); }
+.log .warn .k { color: var(--color-warn); }
+.log .info .k { color: var(--color-acc-tx); }
+.log .test .k { color: var(--color-tst); }
+
+:fullscreen { background: #000; }
+
+/* scroll list inside the red incident card: a scrollbar you can actually see */
+.scroll-alert { scrollbar-color: #8A3A33 transparent; }
+.scroll-alert::-webkit-scrollbar-thumb { background: #8A3A33; }
+
+/* thin dark scrollbars */
+* { scrollbar-width: thin; scrollbar-color: #2A3A4B transparent; }
+*::-webkit-scrollbar { width: 8px; height: 8px; }
+*::-webkit-scrollbar-thumb { background: #2A3A4B; border-radius: 8px; }
+*::-webkit-scrollbar-track { background: transparent; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}

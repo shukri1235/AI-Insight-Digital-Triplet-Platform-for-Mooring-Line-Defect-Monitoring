@@ -1,0 +1,125 @@
+erDiagram
+    analysis_runs {
+        text id PK
+        text video_id FK
+        text kind
+        real conf
+        real trigger_conf
+        text threshold_log
+        real sample_fps
+        text model_name
+        text status
+        real progress
+        real checkpoint_sec
+        int frames_analyzed
+        int frames_with_defects
+        text parent_run_id  "id link"
+        etc plus_6_more_columns
+    }
+    defects {
+        int id PK
+        text video_id FK
+        text run_id  "id link"
+        text defect_type
+        text raw_class
+        real timestamp_sec
+        real confidence
+        text severity
+        real x
+        real y
+        real width
+        real height
+        datetime created_at
+    }
+    line_segments {
+        int id PK
+        text line_id FK
+        text segment_name
+        real depth_start_m
+        real depth_end_m
+    }
+    mooring_lines {
+        text id PK
+        text name
+        real seabed_depth_meters
+    }
+    reports {
+        text id PK
+        text scope_type
+        text scope_ref  "id link"
+        text title
+        text status
+        text generator
+        text facts_json
+        text ai_json
+        text report_json
+        text grounding_json
+        text engineer
+        datetime approved_at
+        datetime created_at
+        datetime updated_at
+    }
+    videos {
+        text id PK
+        text file_hash
+        text original_filename
+        text display_name
+        text current_filepath
+        text playback_path
+        text codec
+        bool is_managed
+        text status
+        text source_type
+        real progress
+        text error_message
+        text parent_video_id  "id link"
+        text line_id FK
+        etc plus_21_more_columns
+    }
+    object_detections {
+        int id PK
+        text media_id  "id link"
+        text run_id  "id link"
+        real t
+        text cls
+        real conf
+        real x
+        real y
+        real w
+        real h
+    }
+    rov_events {
+        int id PK
+        text media_id  "id link"
+        real t
+        real wall_time
+        text kind
+        text text
+    }
+    sensor_samples {
+        int id PK
+        text media_id  "id link"
+        real t
+        real wall_time
+        text source
+        real depth
+        real heading
+        real roll
+        real pitch
+        real temperature
+        real pressure_hpa
+        real altitude
+        real climb
+        real battery_v
+        etc plus_3_more_columns
+    }
+    videos ||--o{ analysis_runs : "video_id"
+    videos ||--o{ defects : "video_id"
+    mooring_lines ||--o{ line_segments : "line_id"
+    mooring_lines ||--o{ videos : "line_id"
+    analysis_runs ||..o{ defects : "run_id"
+    videos ||..o{ reports : "scope_ref"
+    videos ||..o{ sensor_samples : "media_id"
+    videos ||..o{ rov_events : "media_id"
+    videos ||..o{ object_detections : "media_id"
+    analysis_runs ||..o{ object_detections : "run_id"

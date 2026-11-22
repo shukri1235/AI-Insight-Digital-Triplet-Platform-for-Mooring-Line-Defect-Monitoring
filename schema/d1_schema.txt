@@ -1,0 +1,185 @@
+Mooring Twin - database schema, read from the app's SQLite files
+
+==========================================================================================
+INSPECTION DATABASE  (fyp_database.db)
+==========================================================================================
+
+CREATE TABLE analysis_runs (
+	id VARCHAR(36) NOT NULL, 
+	video_id VARCHAR(36), 
+	kind VARCHAR(20), 
+	conf FLOAT, 
+	trigger_conf FLOAT, 
+	threshold_log TEXT, 
+	sample_fps FLOAT, 
+	model_name VARCHAR(255), 
+	status VARCHAR(20), 
+	progress FLOAT, 
+	checkpoint_sec FLOAT, 
+	frames_analyzed INTEGER, 
+	frames_with_defects INTEGER, 
+	error_message TEXT, 
+	parent_run_id VARCHAR(36), 
+	created_at DATETIME, 
+	started_at DATETIME, 
+	completed_at DATETIME, "ops_log" TEXT, "timing" TEXT, 
+	PRIMARY KEY (id), 
+	FOREIGN KEY(video_id) REFERENCES videos (id)
+);
+CREATE INDEX ix_analysis_runs_video_id ON analysis_runs (video_id);
+
+CREATE TABLE defects (
+	id INTEGER NOT NULL, 
+	video_id VARCHAR(36), 
+	run_id VARCHAR(36), 
+	defect_type VARCHAR(50), 
+	raw_class VARCHAR(50), 
+	timestamp_sec FLOAT, 
+	confidence FLOAT, 
+	severity VARCHAR(20), 
+	x FLOAT, 
+	y FLOAT, 
+	width FLOAT, 
+	height FLOAT, 
+	created_at DATETIME, 
+	PRIMARY KEY (id), 
+	FOREIGN KEY(video_id) REFERENCES videos (id)
+);
+CREATE INDEX ix_defects_timestamp_sec ON defects (timestamp_sec);
+CREATE INDEX ix_defects_video_id ON defects (video_id);
+CREATE INDEX ix_defects_run_id ON defects (run_id);
+CREATE INDEX ix_defects_run_ts ON defects (run_id, timestamp_sec);
+CREATE INDEX ix_defects_video_ts ON defects (video_id, timestamp_sec);
+
+CREATE TABLE line_segments (
+	id INTEGER NOT NULL, 
+	line_id VARCHAR(50), 
+	segment_name VARCHAR(100), 
+	depth_start_m FLOAT, 
+	depth_end_m FLOAT, 
+	PRIMARY KEY (id), 
+	FOREIGN KEY(line_id) REFERENCES mooring_lines (id)
+);
+
+CREATE TABLE mooring_lines (
+	id VARCHAR(50) NOT NULL, 
+	name VARCHAR(100), 
+	seabed_depth_meters FLOAT, 
+	PRIMARY KEY (id)
+);
+
+CREATE TABLE reports (
+	id VARCHAR(36) NOT NULL, 
+	scope_type VARCHAR(20), 
+	scope_ref VARCHAR(255), 
+	title VARCHAR(255), 
+	status VARCHAR(20), 
+	generator VARCHAR(40), 
+	facts_json TEXT, 
+	ai_json TEXT, 
+	report_json TEXT, 
+	grounding_json TEXT, 
+	engineer VARCHAR(120), 
+	approved_at DATETIME, 
+	created_at DATETIME, 
+	updated_at DATETIME, 
+	PRIMARY KEY (id)
+);
+CREATE INDEX ix_reports_scope_ref ON reports (scope_ref);
+
+CREATE TABLE videos (
+	id VARCHAR(36) NOT NULL, 
+	file_hash VARCHAR(64), 
+	original_filename VARCHAR(255), 
+	display_name VARCHAR(255), 
+	current_filepath VARCHAR(500), 
+	playback_path VARCHAR(500), 
+	codec VARCHAR(16), 
+	is_managed BOOLEAN, 
+	status VARCHAR(50), 
+	source_type VARCHAR(50), 
+	progress FLOAT, 
+	error_message TEXT, 
+	pending_conf FLOAT, 
+	duration_sec FLOAT, 
+	fps FLOAT, 
+	width INTEGER, 
+	height INTEGER, 
+	frames_analyzed INTEGER, 
+	parent_video_id VARCHAR(36), 
+	trigger_offset_sec FLOAT, 
+	quick_hash VARCHAR(80), 
+	file_size INTEGER, 
+	started_at DATETIME, 
+	resume_from_sec FLOAT, 
+	created_at DATETIME, 
+	completed_at DATETIME, 
+	active_run_id VARCHAR(36), 
+	tlog_path VARCHAR(500), 
+	tlog_offset_sec FLOAT, 
+	tlog_samples INTEGER, 
+	is_test BOOLEAN, 
+	test_profile TEXT, 
+	line_id VARCHAR(50), "parent_offset_sec" FLOAT, "pinned_at" DATETIME, 
+	PRIMARY KEY (id), 
+	FOREIGN KEY(line_id) REFERENCES mooring_lines (id)
+);
+CREATE UNIQUE INDEX ix_videos_file_hash ON videos (file_hash);
+CREATE INDEX ix_videos_quick_hash ON videos (quick_hash);
+==========================================================================================
+ROV SENSOR DATABASE  (fyp_sensors.db)
+==========================================================================================
+
+CREATE TABLE object_detections (
+	id INTEGER NOT NULL, 
+	media_id VARCHAR(36), 
+	run_id VARCHAR(36), 
+	t FLOAT, 
+	cls VARCHAR(60), 
+	conf FLOAT, 
+	x FLOAT, 
+	y FLOAT, 
+	w FLOAT, 
+	h FLOAT, 
+	PRIMARY KEY (id)
+);
+CREATE INDEX ix_object_detections_media_id ON object_detections (media_id);
+CREATE INDEX ix_object_detections_run_id ON object_detections (run_id);
+
+CREATE TABLE rov_events (
+	id INTEGER NOT NULL, 
+	media_id VARCHAR(36), 
+	t FLOAT, 
+	wall_time FLOAT, 
+	kind VARCHAR(20), 
+	text TEXT, 
+	PRIMARY KEY (id)
+);
+CREATE INDEX ix_rov_events_media_id ON rov_events (media_id);
+
+CREATE TABLE sensor_samples (
+	id INTEGER NOT NULL, 
+	media_id VARCHAR(36), 
+	t FLOAT, 
+	wall_time FLOAT, 
+	source VARCHAR(16), 
+	depth FLOAT, 
+	heading FLOAT, 
+	roll FLOAT, 
+	pitch FLOAT, 
+	temperature FLOAT, 
+	pressure_hpa FLOAT, 
+	altitude FLOAT, 
+	climb FLOAT, 
+	battery_v FLOAT, 
+	battery_pct FLOAT, 
+	armed BOOLEAN, 
+	mode VARCHAR(20), 
+	PRIMARY KEY (id)
+);
+CREATE INDEX ix_sensor_samples_t ON sensor_samples (t);
+CREATE INDEX ix_sensor_samples_media_id ON sensor_samples (media_id);
+CREATE INDEX ix_samples_media_t ON sensor_samples (media_id, t);
+
+Declared foreign keys: analysis_runs.video_id -> videos, defects.video_id -> videos, line_segments.line_id -> mooring_lines, videos.line_id -> mooring_lines
+Id links kept by the app (not declared): videos.parent_video_id -> videos, analysis_runs.parent_run_id -> analysis_runs, defects.run_id -> analysis_runs, reports.scope_ref -> videos, sensor_samples.media_id -> videos, rov_events.media_id -> videos, object_detections.media_id -> videos, object_detections.run_id -> analysis_runs

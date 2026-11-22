@@ -1,0 +1,346 @@
+# ==============================================================================================================
+#  MOORING TWIN SETTINGS
+# ==============================================================================================================
+#  How to use this file
+#   1. Save it as config.toml in the app folder (the one with backend/ and frontend/), or press
+#      System drawer -> Settings -> Create config.toml.
+#   2. To change a setting, delete the "# " in front of its line and edit the value. Everything left
+#      commented keeps its built-in default.
+#   3. Save, then restart the app (start.bat / start.sh).
+#   4. Check System drawer -> Settings: it lists every value in use, where it came from (default, this
+#      file or an environment variable) and any value it could not use (it then keeps the default).
+#
+#  Text goes in quotes ("cpu"), numbers and true/false do not. Windows paths: use / or \\
+#  ("D:/MooringTwin/media"). Relative paths start from this file's folder.
+#  An environment variable with the name shown under a setting overrides this file.
+#
+#  Common situations - false clips, picture lag, 60 fps camera, shallow test site, cloud database,
+#  slow Gemini ...: see docs/CONFIG.md, which says which settings to change and what you give up.
+#
+#  Not in this file: the Gemini API key (.env file) and the PDF look (System -> PDF report templates).
+# ==============================================================================================================
+
+
+# --------------------------------------------------------------------------------------------------------------
+#  FOLDERS AND FILES
+#  Where the app keeps its data. Point these at a bigger or backed-up drive; existing files are not moved for
+#  you - copy them across first, then change the path and restart.
+# --------------------------------------------------------------------------------------------------------------
+[paths]
+
+# Media folder
+#     Incident clips, browser uploads, review copies, .tlog files and report images. Dive videos imported from
+#     this PC stay where they are and are not copied here.
+#     When to change: Move it to a larger drive if clips and .tlogs fill the system disk (roughly 1-3 MB per
+#     incident clip).
+#     Environment variable: FYP_MEDIA_DIR
+# media_dir = "backend/media"
+
+# Event log folder
+#     One text file per app session (session_<date>_<time>.txt): every event-log entry from the browser plus the
+#     backend's own record of live dives, incident clips, batch analyses and approved reports. A paper trail:
+#     files are only ever added to, never changed or deleted by the app.
+#     When to change: Point it at a backed-up or shared drive if the trail must be kept with the inspection
+#     records.
+#     Environment variable: FYP_LOGS_DIR
+# logs_dir = "logs"
+
+# ..... rarely needs changing .................................................................................
+
+# Model folder
+#     Folder searched for detection weights (.pt files).
+#     Environment variable: FYP_MODELS_DIR
+# models_dir = "backend/models"
+
+# Database file
+#     The local inspection database (dives, detections, reports). The ROV sensor log is a second file next to it
+#     (fyp_sensors.db). Ignored when database.url is set.
+#     When to change: Keep it on a local drive, not a network share - SQLite over a network share can corrupt.
+#     Environment variable: FYP_DB_PATH
+# database = "backend/fyp_database.db"
+
+
+# --------------------------------------------------------------------------------------------------------------
+#  DATABASE
+#  Empty = two local files next to the app (the normal setup on one PC). Set an address to keep the inspection
+#  records on a database server instead (cloud / AWS RDS, several users).
+# --------------------------------------------------------------------------------------------------------------
+[database]
+
+# Database server address
+#     Address of a PostgreSQL server for the inspection records, e.g.
+#     postgresql+psycopg://mooring:PASSWORD@my-db.xxxx.rds.amazonaws.com:5432/mooring . Empty = the local file.
+#     When to change: Needs: pip install "psycopg[binary]", and tools/migrate_db.py to copy existing data across
+#     once. Put the address in the FYP_DATABASE_URL environment variable rather than this file when it contains
+#     a password.
+#     Environment variable: FYP_DATABASE_URL
+# url = ""
+
+# ..... rarely needs changing .................................................................................
+
+# Sensor database address
+#     Where the 5 Hz ROV sensor log goes. Empty = the same server as database.url (or the local sensor file).
+#     When to change: Only set it to put the high-volume sensor log on a different server.
+#     Environment variable: FYP_SENSOR_DATABASE_URL
+# sensor_url = ""
+
+
+# --------------------------------------------------------------------------------------------------------------
+#  DETECTION MODEL
+#  Which trained weights are loaded and on which processor.
+# --------------------------------------------------------------------------------------------------------------
+[model]
+
+# Weights loaded at start
+#     File name in the model folder (or a full path). Another model can still be loaded from the System drawer.
+#     When to change: Point it at the newest training run after retraining (or copy that best.pt into the model
+#     folder).
+#     Environment variable: FYP_DEFAULT_MODEL
+# default = "best.pt"
+
+# Processor  (allowed "auto" / "cuda:0" / "cpu")
+#     "auto" uses the NVIDIA GPU when one works, otherwise the CPU.
+#     When to change: Force "cpu" only to test without a GPU - live detection on a CPU is several times slower.
+#     Environment variable: FYP_DEVICE
+# device = "auto"
+
+# ..... rarely needs changing .................................................................................
+
+# Half precision on the GPU  (allowed true / false)
+#     FP16 maths on the GPU: about twice as fast, same detections in practice.
+#     When to change: Turn off only if a GPU driver problem shows wrong or no detections.
+#     Environment variable: FYP_HALF
+# half = true
+
+
+# --------------------------------------------------------------------------------------------------------------
+#  LIVE DIVE
+#  How the live feed is analysed, when an incident clip is saved, and how much delay the picture has.
+# --------------------------------------------------------------------------------------------------------------
+[live]
+
+# Clip trigger (starting value)  (confidence 0-1, allowed 0.1 to 0.99)
+#     Deformation confidence that saves an incident clip and raises the alert. This is where the Live slider
+#     starts; the operator can still move it during a dive, and every change is recorded with the dive.
+#     When to change: 0.60 was chosen for model v4 by the threshold sweep on the validation video (the lowest
+#     threshold with false alarms <= 1 % of clean frames; threshold_sweep.py). With a different model, re-run
+#     the sweep rather than guess. Raise it (e.g. 0.70) if clean chain keeps saving clips; lower it (e.g. 0.50)
+#     if real deformations are missed. Pitting never saves a clip, whatever this is.
+#     Environment variable: FYP_LIVE_TRIGGER
+# trigger_default = 0.6
+
+# Show and log from  (confidence 0-1, allowed 0.1 to 0.99)
+#     Detections at or above this are drawn on the live feed (dashed below the trigger) and saved as sightings.
+#     When to change: Lower = more weak sightings for the engineer to review (and more noise); higher = a
+#     cleaner log that may miss faint defects. Must be at or below the clip trigger.
+#     Environment variable: FYP_LIVE_LOG_CONF
+# log_conf = 0.4
+
+# Hold rule: hits needed  (frames, allowed 1 to 30)
+#     A clip is saved only when the trigger is reached on this many of the last trigger_window analysed frames,
+#     so a one-frame flicker (e.g. a normal link seen edge-on) does not save a clip.
+#     When to change: More hits = fewer false clips but a defect must stay in view longer. 1 hit of 1 = any
+#     single frame (the old behaviour). At 60 fps use about twice the numbers (e.g. 5 of 8) to keep the same
+#     time span.
+#     Environment variable: TRIGGER_HITS
+# trigger_hits = 3
+
+# Hold rule: out of the last  (frames, allowed 1 to 60)
+#     Window for trigger_hits: 3 hits out of the last 5 analysed frames means the defect must be seen for about
+#     0.1-0.2 s at 30 fps.
+#     When to change: Must be at least trigger_hits.
+#     Environment variable: TRIGGER_WINDOW
+# trigger_window = 5
+
+# Gap between clips  (s, allowed 0 to 600)
+#     Minimum time between two incident clips, so one defect held in view does not save a clip every few
+#     seconds.
+#     When to change: Shorter if defects are close together along the chain and each needs its own clip.
+#     Environment variable: FYP_INCIDENT_COOLDOWN
+# incident_cooldown_sec = 10.0
+
+# Auto mode starts detecting below  (m, allowed 0 to 100)
+#     In Auto mode detection runs only while the ROV is deeper than this, so launch and recovery at the surface
+#     do not raise alerts.
+#     When to change: Use 0.3-0.5 in a test tank or shallow lake, or simply switch to Armed.
+#     Environment variable: FYP_AUTO_ARM_DEPTH
+# auto_arm_depth_m = 2.0
+
+# Video decoder threads  (threads, allowed 0 to 32)
+#     Threads that decode the camera stream. Each extra thread holds the picture back by one more frame (33 ms
+#     at 30 fps); 2 keeps the delay low and decodes 1080p30 easily.
+#     When to change: Raise to 4 only if the System drawer shows the capture rate below the camera's (4K or 60
+#     fps cameras). 0 = one per CPU core (OpenCV's default: about 0.5 s more delay on a 16-thread PC).
+#     Environment variable: FYP_LIVE_DECODER_THREADS
+# decoder_threads = 2
+
+# ..... rarely needs changing .................................................................................
+
+# High-confidence label from  (confidence 0-1, allowed 0.1 to 0.99)
+#     A deformation or pitting detection at or above this confidence is labelled High confidence in the app and
+#     the report facts (below: Low confidence). The label states how certain the model is, not how severe the
+#     defect is. The rule-based report proposes REPAIR when a deformation event reaches it.
+#     When to change: Keep it equal to live.trigger_default, so every deformation that saves a clip is High
+#     confidence.
+#     Environment variable: FYP_CRITICAL_CONF
+# critical_conf = 0.6
+
+
+# --------------------------------------------------------------------------------------------------------------
+#  BLUEROV2 LINK
+#  Where the vehicle's telemetry (depth, heading, battery ...) arrives.
+# --------------------------------------------------------------------------------------------------------------
+[rov]
+
+# Telemetry address
+#     Where the app listens for the vehicle's MAVLink messages. In BlueOS -> MAVLink Endpoints add a UDP client
+#     to <this PC's IP>:14551. QGroundControl keeps its own port (14550), so both work at once.
+#     When to change: Change the port only if 14551 is already used on this PC.
+#     Environment variable: FYP_MAVLINK_URL
+# mavlink_url = "udpin:0.0.0.0:14551"
+
+
+# --------------------------------------------------------------------------------------------------------------
+#  BATCH (IMPORTED DIVE VIDEOS)
+#  How recorded videos are analysed after the dive. None of these change live detection.
+# --------------------------------------------------------------------------------------------------------------
+[batch]
+
+# Frames analysed per second of video  (frames/s, allowed 0.2 to 60)
+#     Batch looks at this many frames per second of footage (2 = every 15th frame of a 30 fps video). A defect
+#     in view for 1 s is seen on at least 2 frames.
+#     When to change: Higher finds short glimpses but takes longer (decoding is the slow part, so not
+#     proportionally); lower is faster but can miss defects that pass quickly.
+#     Environment variable: FYP_BATCH_SAMPLE_FPS
+# sample_fps = 2.0
+
+# ..... rarely needs changing .................................................................................
+
+# Frames per GPU batch  (frames, allowed 1 to 64)
+#     Frames sent to the GPU together. While a live dive runs, batch automatically uses chunks of 2 so live goes
+#     first.
+#     When to change: Larger can be slightly faster on a big GPU; smaller if the GPU runs out of memory.
+#     Environment variable: FYP_BATCH_SIZE
+# batch_size = 8
+
+# Read videos with ffmpeg  (allowed true / false)
+#     Uses ffmpeg (with GPU video decoding when available) to read dive videos; off = OpenCV.
+#     When to change: Turn off only if a video fails to import with an ffmpeg error.
+#     Environment variable: FYP_BATCH_FFMPEG
+# ffmpeg_reader = true
+
+# Read-ahead (batches)  (batches, allowed 0 to 8)
+#     Batches decoded in the background while the GPU analyses the current one, so the two overlap. Each batch
+#     holds batch_size frames in memory (about 2.7 MB per 1280x720 frame).
+#     When to change: 0 = off (the old behaviour, for comparison). More than 2 rarely helps.
+#     Environment variable: FYP_BATCH_PREFETCH
+# prefetch_batches = 2
+
+
+# --------------------------------------------------------------------------------------------------------------
+#  REPORT ASSISTANT (GEMINI)
+#  Limits for the AI draft. When Gemini is slow or busy the app falls back to a rule-based draft, so a report is
+#  never lost. The API key is NOT set here - it stays in the .env file.
+# --------------------------------------------------------------------------------------------------------------
+[gemini]
+
+# Gemini model (starting choice)
+#     The model used for AI drafts until someone picks another in the app (the app's choice then wins).
+#     When to change: Retired models are flagged in the System drawer with the suggested replacement.
+#     Environment variable: GEMINI_MODEL
+# model = "gemini-3.8-flash"
+
+# Fallback model
+#     Tried when the main model is busy, times out or runs out of quota, before the rule-based draft.
+#     When to change: "" = no fallback (go straight to the rule-based draft).
+#     Environment variable: GEMINI_FALLBACK_MODEL
+# fallback_model = "gemini-3.5-flash-lite"
+
+# Thinking level  (allowed "low" / "high")
+#     How much Gemini 3 models reason before answering.
+#     When to change: "low" is much faster and enough for writing up given facts; "high" is slower - only to
+#     compare drafts.
+#     Environment variable: GEMINI_THINKING
+# thinking = "low"
+
+# Overall deadline  (s, allowed 20 to 900)
+#     Total time for an AI draft (all attempts and the fallback). After this the rule-based draft is used and
+#     can be redrafted with Gemini later.
+#     Environment variable: GEMINI_DEADLINE_SEC
+# deadline_sec = 150.0
+
+# Gap between AI reports  (s, allowed 0 to 3600)
+#     Minimum time between two AI drafts, to save tokens / quota. Rule-based drafts are not limited.
+#     Environment variable: GEMINI_COOLDOWN_SEC
+# cooldown_sec = 30
+
+# ..... rarely needs changing .................................................................................
+
+# Time limit per request  (s, allowed 10 to 600)
+#     Longest wait for one Gemini answer.
+#     When to change: Raise on a very slow connection; the overall deadline below still applies.
+#     Environment variable: GEMINI_TIMEOUT_SEC
+# timeout_sec = 90.0
+
+# Quick retries when busy  (attempts, allowed 0 to 5)
+#     Extra attempts on the same model when it answers "busy", before trying the fallback model.
+#     Environment variable: GEMINI_RETRIES
+# retries = 1
+
+
+# --------------------------------------------------------------------------------------------------------------
+#  REPORTS AND PDF
+#  What goes into a report and which PDF template it uses.
+# --------------------------------------------------------------------------------------------------------------
+[report]
+
+# Events with key frames  (events, allowed 0 to 20)
+#     How many events per report get pictures (a full frame and a close-up each). The images are sent to Gemini
+#     and printed in the PDF.
+#     When to change: More = a fuller report but more tokens and a longer PDF.
+#     Environment variable: FYP_REPORT_MAX_KEYFRAMES
+# max_keyframes = 4
+
+# PDF template
+#     Template used when none is chosen at export (a file name in the templates folder, without .json).
+#     When to change: Templates are edited in System -> PDF report templates.
+#     Environment variable: FYP_REPORT_TEMPLATE
+# template = "default"
+
+# ..... rarely needs changing .................................................................................
+
+# Templates folder
+#     Folder of PDF templates (one .json and logo per client).
+#     Environment variable: FYP_REPORT_TEMPLATES_DIR
+# templates_dir = "report_templates"
+
+
+# --------------------------------------------------------------------------------------------------------------
+#  SERVER AND NETWORK
+#  Port and who may use the server from other PCs.
+# --------------------------------------------------------------------------------------------------------------
+[server]
+
+# Port  (allowed 1024 to 65535)
+#     The app is opened at http://<this PC>:<port>.
+#     When to change: Change it if 8500 is used by another program. Other PCs also need this port allowed in the
+#     firewall.
+#     Environment variable: FYP_PORT
+# port = 8500
+
+# Let other PCs browse this PC's folders  (allowed true / false)
+#     Off: only someone at this PC can browse its drives to import dive videos. Others can still watch, review
+#     and write reports.
+#     When to change: Turn on only on a trusted network where other PCs must import videos from this PC's
+#     drives.
+#     Environment variable: FYP_ALLOW_REMOTE_FS
+# allow_remote_fs = false
+
+# ..... rarely needs changing .................................................................................
+
+# Test Mode camera port  (allowed 1024 to 65535)
+#     UDP port of Test Mode's simulated camera (the BlueROV2's camera uses 5600 too).
+#     When to change: Change it if QGroundControl on this PC is already receiving video on 5600 while you use
+#     Test Mode.
+#     Environment variable: FYP_TEST_STREAM_PORT
+# test_stream_port = 5600
