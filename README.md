@@ -229,3 +229,5 @@ Now: cwd-independent search of `models/` and `runs/**/weights/`, no silent downl
 - **Analyses are immutable:** a different threshold is a new analysis linked to its parent, so an alert can always be explained by the threshold that produced it.
 - **Two databases:** `fyp_database.db` holds inspections and reports (small, the thing you back up and hand in). `fyp_sensors.db` holds high-rate ROV samples (5 Hz → 72 000 rows per 4-hour dive). The raw MAVLink `.tlog` per dive is kept in `media/tlogs/`, so sensor data can always be rebuilt.
 - **Local times:** timestamps are stored in UTC and shown in the PC's time zone.
+
+The dissertation quotes tests/results/RESULTS - real.md (22 Nov 2026, 02:01). RESULTS.md is a later repeat run (03:10) with the same verdicts and small run-to-run variation
