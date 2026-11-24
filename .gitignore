@@ -10,5 +10,6 @@ runs/
 .env
 tests/e2e/.media/
 logs/
-
+backend/media/
+config.toml
 README.md
